@@ -85,7 +85,6 @@ Icon=%{name}
 Terminal=false
 Type=Application
 Categories=GTK;Game;AdventureGame;X-MandrivaLinux-MoreApplications-Games-Adventure;
-Encoding=UTF-8
 EOF
 
 %post
