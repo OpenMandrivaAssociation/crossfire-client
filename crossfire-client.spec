@@ -1,5 +1,5 @@
 %define	version	1.10.0
-%define	release %mkrel 1
+%define	release %mkrel 2
 
 Name:		crossfire-client
 Version:	%{version}
@@ -20,7 +20,7 @@ BuildRequires:	gtk2-devel
 BuildRequires:	SDL_image1.2-devel
 BuildRequires:	libmesaglut-devel
 BuildRequires:	alsa-lib-devel
-Requires:	%{name}-data >= 1.9.1
+Requires:	%{name}-data >= 1.10.0
 
 %description
 Crossfire is a highly graphical role-playing adventure game with
