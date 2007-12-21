@@ -8,6 +8,7 @@ Summary:	Client for connecting to crossfire game servers
 Group:		Games/Adventure
 License:	GPL
 URL:		http://crossfire.real-time.com/
+BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 Source0:	http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
 Source3:	%{name}-icon-small.png
