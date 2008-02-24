@@ -20,6 +20,7 @@ BuildRequires:	gtk2-devel
 BuildRequires:	SDL_image-devel
 BuildRequires:	libmesaglut-devel
 BuildRequires:	alsa-lib-devel
+BuildRequires:	curl-devel
 Requires:	%{name}-data >= 1.11.0
 
 %description
