@@ -1,5 +1,5 @@
-%define	version	1.10.0
-%define	release %mkrel 2
+%define	version	1.11.0
+%define	release %mkrel 1
 
 Name:		crossfire-client
 Version:	%{version}
@@ -17,10 +17,10 @@ Source5:	%{name}-icon-large.png
 #Patch0:		crossfire-client-1.8.0-glut-detect.patch
 
 BuildRequires:	gtk2-devel
-BuildRequires:	SDL_image1.2-devel
+BuildRequires:	SDL_image-devel
 BuildRequires:	libmesaglut-devel
 BuildRequires:	alsa-lib-devel
-Requires:	%{name}-data >= 1.10.0
+Requires:	%{name}-data >= 1.11.0
 
 %description
 Crossfire is a highly graphical role-playing adventure game with
@@ -34,7 +34,6 @@ You do not need to install the crossfire server in order to play crossfire.
 
 %prep
 %setup -q
-#%patch0 -p1 -b .glut
 
 autoconf
 
