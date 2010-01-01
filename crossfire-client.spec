@@ -1,26 +1,25 @@
-%define	version	1.11.0
-%define	release %mkrel 4
+%define	version	1.12.0
+%define	release %mkrel 1
 
 Name:		crossfire-client
 Version:	%{version}
 Release:	%{release}
 Summary:	Client for connecting to crossfire game servers
 Group:		Games/Adventure
-License:	GPL
+License:	GPLv2+
 URL:		http://crossfire.real-time.com/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
-
 Source0:	http://prdownloads.sourceforge.net/%{name}/%{name}-%{version}.tar.bz2
 Source3:	%{name}-icon-small.png
 Source4:	%{name}-icon-medium.png
 Source5:	%{name}-icon-large.png
-#Patch0:		crossfire-client-1.8.0-glut-detect.patch
-
+Patch0:		%{name}-1.12.0-fix-str-fmt.patch
 BuildRequires:	gtk2-devel
 BuildRequires:	SDL_image-devel
 BuildRequires:	libmesaglut-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:	curl-devel
+BuildRequires:	lua-devel
 Requires:	%{name}-data >= 1.11.0
 
 %description
@@ -35,8 +34,7 @@ You do not need to install the crossfire server in order to play crossfire.
 
 %prep
 %setup -q
-
-autoconf
+%patch0 -p0
 
 bzip2 -c ChangeLog > ChangeLog.bz2
 
@@ -44,8 +42,7 @@ bzip2 -c ChangeLog > ChangeLog.bz2
 # If data file path is changed, crossfire-client-data spec file
 # needs to be adjusted as well.
 %configure2_5x \
-	--disable-alsa \
-	--disable-gtk \
+	--disable-gtkv1 \
 	--with-sound-dir=%{_datadir}/%{name}/sounds \
 	--bindir=%{_gamesbindir} \
 	--datadir=%{_gamesdatadir}
@@ -53,19 +50,19 @@ bzip2 -c ChangeLog > ChangeLog.bz2
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 %makeinstall_std
 
 # icons
-mkdir -p $RPM_BUILD_ROOT{%{_iconsdir},%{_miconsdir},%{_liconsdir}}
-install -m 0644 %{SOURCE3} $RPM_BUILD_ROOT%{_miconsdir}/%{name}.png
-install -m 0644 %{SOURCE4} $RPM_BUILD_ROOT%{_iconsdir}/%{name}.png
-install -m 0644 %{SOURCE5} $RPM_BUILD_ROOT%{_liconsdir}/%{name}.png
+mkdir -p %{buildroot}{%{_iconsdir},%{_miconsdir},%{_liconsdir}}
+install -m 0644 %{SOURCE3} %{buildroot}%{_miconsdir}/%{name}.png
+install -m 0644 %{SOURCE4} %{buildroot}%{_iconsdir}/%{name}.png
+install -m 0644 %{SOURCE5} %{buildroot}%{_liconsdir}/%{name}.png
 
 # menu
 
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
-cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
+mkdir -p %{buildroot}%{_datadir}/applications
+cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
 Name=Crossfire Client
 Comment=%{summary}
@@ -87,7 +84,7 @@ EOF
 %endif
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
