@@ -1,0 +1,33 @@
+diff -p -up ./common/misc.c.orig ./common/misc.c
+--- ./common/misc.c.orig	2010-04-26 08:03:15.000000000 +0200
++++ ./common/misc.c	2010-12-03 16:01:40.000000000 +0100
+@@ -191,7 +191,7 @@ void LOG(LogLevel level, const char *ori
+     LOG_SETMESSAGE(le,buf);
+     LOG_SETORIGIN(le,origin);
+     le->level=level;
+-    fprintf(stderr,getLogText(le));
++    fprintf(stderr, "%s", getLogText(le));
+     if (loglist)
+         (*loglist)(le);
+   }
+diff -p -up ./gtk-v2/src/account.c.orig ./gtk-v2/src/account.c
+--- ./gtk-v2/src/account.c.orig	2010-12-03 16:03:41.000000000 +0100
++++ ./gtk-v2/src/account.c	2010-12-03 16:03:16.000000000 +0100
+@@ -726,7 +726,7 @@ static void do_account_create(const char
+         SockList_AddString(&sl, p1);
+         SockList_Send(&sl, csocket.fd);
+         /* Store password away for new character creation */
+-        snprintf(account_password, 256, p1);
++        snprintf(account_password, 256, "%s", p1);
+     }
+ }
+ 
+@@ -934,7 +934,7 @@ static void do_account_login(const char
+         SockList_AddString(&sl, password);
+         SockList_Send(&sl, csocket.fd);
+         /* Store password away for new character creation */
+-        snprintf(account_password, 256, password);
++        snprintf(account_password, 256, "%s", password);
+     }
+ }
+ 
