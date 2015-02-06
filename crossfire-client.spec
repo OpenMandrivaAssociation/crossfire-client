@@ -1,5 +1,5 @@
 %define	version	1.70.0
-%define	release %mkrel 1
+%define release 2
 
 Name:		crossfire-client
 Version:	%{version}
